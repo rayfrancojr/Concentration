@@ -12,6 +12,7 @@ class ViewController: UIViewController {
 
     @IBAction func touchCard(_ sender: UIButton) {
         print("agh! a ghost!")
+        print("Hello CS163p")
     }
     
 }
