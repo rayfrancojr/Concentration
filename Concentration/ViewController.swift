@@ -6,6 +6,11 @@
 //  Copyright © 2018 Eleix. All rights reserved.
 //
 
+/*-----------------------------------------------------------
+ The concentraction game should be writtien such
+ that the number of cards can esaily be chnaged.
+ -----------------------------------------------------------*/
+
 /*----------------------------------------------------------\
 | Cards or Buttons that are turned over, do not have titles |
 \----------------------------------------------------------*/
@@ -13,6 +18,8 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    var game = Concentration()
     
     var flipCount = 0 {
         didSet {
