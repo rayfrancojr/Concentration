@@ -6,6 +6,10 @@
 //  Copyright © 2018 Eleix. All rights reserved.
 //
 
+/*----------------------------------------------------------\
+| Cards or Buttons that are turned over, do not have titles |
+\----------------------------------------------------------*/
+
 import UIKit
 
 class ViewController: UIViewController {
@@ -16,9 +20,10 @@ class ViewController: UIViewController {
         }
     }
     
-    var emojiChoices  = ["🎃","👻","🎃","👻"]
     @IBOutlet weak var flipCountLabel: UILabel!
     
+    
+    var emojiChoices  = ["🎃","👻","🎃","👻"]
    
     @IBOutlet var cardButtons: [UIButton]!
     
