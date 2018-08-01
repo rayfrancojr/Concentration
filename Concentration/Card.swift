@@ -17,8 +17,8 @@ struct Card
     static var indentifierFactory = 0
     static func getUniqueIdentifier() -> Int
     {
-        Card.indentifierFactory += 1
-        return Card.indentifierFactory
+        indentifierFactory += 1
+        return indentifierFactory
     }
     init () {
         self.identifier = Card.getUniqueIdentifier()
