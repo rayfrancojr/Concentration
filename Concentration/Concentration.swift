@@ -6,6 +6,12 @@
 //  Copyright © 2018 Eleix. All rights reserved.
 //
 
+/*---------------------------------------\
+| class Concentration is the model -     |
+| It is the "what" the program does.     |
+| It is UI independance.                 |
+\---------------------------------------*/
+
 import Foundation
 
 class Concentration
