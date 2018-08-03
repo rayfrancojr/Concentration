@@ -26,9 +26,6 @@ class ViewController: UIViewController {
     }
     
     @IBOutlet weak var flipCountLabel: UILabel!
-    
-    
-   
    
     @IBOutlet var cardButtons: [UIButton]!
     
@@ -36,6 +33,7 @@ class ViewController: UIViewController {
     @IBAction func touchCard(_ sender: UIButton) {
         flipCount += 1
         if let cardNumber = cardButtons.index(of: sender) {
+            print("cardNunber = \(cardNumber)")
             game.choseCard(at: cardNumber)
             /*-------------------------\
             | The Model has changed.   |
@@ -70,8 +68,26 @@ class ViewController: UIViewController {
     
      var emojiChoices = ["🦇","😱","🙀","😈","🎃","👻","🍭","🍬","🍎"]
     
+    var emoji = [Int: String]()
+
+    /*------------------------------------------------------------\
+    | This function return an emoji.                              |
+    | If the associate emoji is nil, it assigns one,              |
+    | and it removes the assigned emoji from the emojiChoices     |
+    -------------------------------------------------------------*/
     func emoji(for card: Card) -> String {
-       return "?"
+        if emoji[card.identifier] == nil , emojiChoices.count > 0 {
+            let randomIndex = Int(arc4random_uniform(UInt32(emojiChoices.count)))
+            emoji[card.identifier] = emojiChoices.remove(at: randomIndex)
+        }
+        /*----------------------------------------
+        if emoji[card.identifier] != nil {
+            return emoji[card.identifier]!
+        } else {
+         return "?"
+        }
+        ----------------------------------------*/
+        return emoji[card.identifier] ?? "?"
     }
 
     
