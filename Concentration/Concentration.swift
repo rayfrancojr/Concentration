@@ -6,7 +6,7 @@
 //  Copyright © 2018 Eleix. All rights reserved.
 //
 
-/*---------------------------------------\
+/*---------------------------------------\x
 | class Concentration is the model -     |
 | It is the "what" the program does.     |
 | It is UI independance.                 |
@@ -56,8 +56,25 @@ class Concentration
         for index in 0..<cards.count {
             print("cards[\(index)].indentifer = \(cards[index].identifier)")
         }
-    }
+        
+        shuffleCards()
+        
+        print("After Shuffling")
+        for index in 0..<cards.count {
+            print("cards[\(index)].indentifer = \(cards[index].identifier)")
+        }    }
     
     //TODO Shuffle the Cards
-    
+    /*-------------------------------------------------
+     Why does the instruction want or suggest that
+     the shuffle cards should be in the model?
+    --------------------------------------------------*/
+    func shuffleCards() {
+        for index in cards.indices {
+            let randomIndex = Int(arc4random_uniform(UInt32(cards.count)))
+            let tempCard = cards[index]
+            cards[index] = cards[randomIndex]
+            cards[randomIndex] = tempCard
+        }
+    }
 }

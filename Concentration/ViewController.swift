@@ -22,7 +22,7 @@ class ViewController: UIViewController {
     lazy var game = Concentration(numberOfPairsOfCards : (cardButtons.count + 1) / 2)
     
     var flipCount = 0 {
-        didSet {flipCountLabel.text = "Flips = \(flipCount)"}      
+        didSet {flipCountLabel.text = "Flips = \(flipCount)"}
     }
     
     @IBOutlet weak var flipCountLabel: UILabel!
@@ -88,8 +88,24 @@ class ViewController: UIViewController {
         }
         ----------------------------------------*/
         return emoji[card.identifier] ?? "?"
-    }
-
+    }    
     
+    @IBAction func Reset(_ sender: UIButton) {
+        emoji = [:]
+        emojiChoices = ["🦇","😱","🙀","😈","🎃","👻","🍭","🍬","🍎"]
+        game.indexOfOneAndOnlyFaceUpCard = nil
+        flipCount = 0
+        game.shuffleCards()
+        for index in cardButtons.indices {
+        // a cardButton is a UIButton, which is
+        // a class and is passed by reference
+            let button = cardButtons[index]
+            button.setTitle("", for: UIControlState.normal)
+            button.backgroundColor = #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
+           //a card is a struct, which is passed by value
+            game.cards[index].isFaceUp = false
+            game.cards[index].isMatched = false
+        }
+    }
 }
 
