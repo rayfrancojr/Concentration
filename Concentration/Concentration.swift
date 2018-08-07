@@ -16,28 +16,51 @@ import Foundation
 
 class Concentration
 {
-    var cards = [Card]()
+    private(set) var cards = [Card]()
 
-    var indexOfOneAndOnlyFaceUpCard: Int?
+    private var indexOfOneAndOnlyFaceUpCard: Int? {
+        get {
+            var foundIndex: Int?
+            for index in cards.indices {
+                if cards[index].isFaceUp {
+                    if foundIndex == nil {
+                        foundIndex = index
+                    } else { // this is the second up card
+                        return nil
+                    }
+                }
+            }
+            return foundIndex
+            
+        }
+        set {
+            for index in cards.indices {
+                cards[index].isFaceUp = (index == newValue)
+            }
+        }
+    }
     
     func choseCard(at index: Int){
         if !cards[index].isMatched // Do nothing if the card is already matched
         {
-            if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
+            if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index
+            // if one card and onlt one card is turned up
+            // and you did not click on the same card that is turn up
+            {
                 // check if cards match
                 if cards[matchIndex].identifier == cards[index].identifier {
                     cards[matchIndex].isMatched = true
                     cards[index].isMatched = true
                 }
                 cards[index].isFaceUp = true
-                indexOfOneAndOnlyFaceUpCard = nil
+//              indexOfOneAndOnlyFaceUpCard = nil
                 
             } else {
                 // two cards are down or up
-                for flipDownIndex in cards.indices {
-                    cards[flipDownIndex].isFaceUp = false
-                }
-                cards[index].isFaceUp = true
+//                for flipDownIndex in cards.indices {
+//                    cards[flipDownIndex].isFaceUp = false
+//                }
+//                cards[index].isFaceUp = true
                 indexOfOneAndOnlyFaceUpCard = index
             }
         }
