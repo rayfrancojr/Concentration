@@ -16,9 +16,9 @@ import Foundation
 
 class Concentration
 {
-    private(set) var cards = [Card]()
+    var cards = [Card]()
 
-    private var indexOfOneAndOnlyFaceUpCard: Int? {
+    var indexOfOneAndOnlyFaceUpCard: Int? {
         get {
             var foundIndex: Int?
             for index in cards.indices {
@@ -41,6 +41,7 @@ class Concentration
     }
     
     func choseCard(at index: Int){
+        assert(cards.indices.contains(index), "Concentration.choseCard(at: \(index)) is not in the cards")
         if !cards[index].isMatched // Do nothing if the card is already matched
         {
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index
@@ -67,6 +68,7 @@ class Concentration
     }
     
     init(numberOfPairsOfCards: Int) {
+        assert(numberOfPairsOfCards > 0, "Concentration.init - numberOfPairsOfCards is 0 or negative")
         print("excuting Concentration Init")
         for _ in 1...numberOfPairsOfCards {
         let card = Card()
@@ -100,4 +102,14 @@ class Concentration
             cards[randomIndex] = tempCard
         }
     }
+
+    func reset() {
+        for index in cards.indices {
+            cards[index].isFaceUp = false
+            cards[index].isMatched = false
+        }
+        shuffleCards()
+      indexOfOneAndOnlyFaceUpCard = nil
+    }
+
 }

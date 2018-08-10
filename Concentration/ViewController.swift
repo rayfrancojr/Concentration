@@ -84,8 +84,7 @@ class ViewController: UIViewController {
     -------------------------------------------------------------*/
     private func emoji(for card: Card) -> String {
         if emoji[card.identifier] == nil , emojiChoices.count > 0 {
-            let randomIndex = Int(arc4random_uniform(UInt32(emojiChoices.count)))
-            emoji[card.identifier] = emojiChoices.remove(at: randomIndex)
+            emoji[card.identifier] = emojiChoices.remove(at: emojiChoices.count.arc4random)
         }
         /*----------------------------------------
         if emoji[card.identifier] != nil {
@@ -95,14 +94,15 @@ class ViewController: UIViewController {
         }
         ----------------------------------------*/
         return emoji[card.identifier] ?? "?"
-    }    
+    }
+
+
+    
     
     @IBAction private func Reset(_ sender: UIButton) {
         emoji = [:]
         emojiChoices = ["🦇","😱","🙀","😈","🎃","👻","🍭","🍬","🍎"]
-        game.indexOfOneAndOnlyFaceUpCard = nil
         flipCount = 0
-        game.shuffleCards()
         for index in cardButtons.indices {
         // a cardButton is a UIButton, which is
         // a class and is passed by reference
@@ -110,9 +110,20 @@ class ViewController: UIViewController {
             button.setTitle("", for: UIControlState.normal)
             button.backgroundColor = #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
            //a card is a struct, which is passed by value
-            game.cards[index].isFaceUp = false
-            game.cards[index].isMatched = false
+            game.reset()
         }
     }
 }
 
+extension Int {
+    var arc4random: Int {
+        if self > 0 {
+            return Int(arc4random_uniform(UInt32(self)))
+        } else {
+            if self < 0 {
+                return -Int(arc4random_uniform(UInt32(abs(self))))
+            }
+        }
+        return 0
+    }
+}
