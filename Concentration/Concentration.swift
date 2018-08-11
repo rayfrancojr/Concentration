@@ -49,7 +49,7 @@ class Concentration
             // and you did not click on the same card that is turn up
             {
                 // check if cards match
-                if cards[matchIndex].identifier == cards[index].identifier {
+                if cards[matchIndex] == cards[index] {
                     cards[matchIndex].isMatched = true
                     cards[index].isMatched = true
                 }

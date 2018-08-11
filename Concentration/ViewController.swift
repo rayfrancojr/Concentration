@@ -75,7 +75,8 @@ class ViewController: UIViewController {
     
      private var emojiChoices = ["🦇","😱","🙀","😈","🎃","👻","🍭","🍬","🍎"]
     
-    private var emoji = [Int: String]()
+    // The emoji var below is a dictionary
+    private var emoji = [Card: String]()
 
     /*------------------------------------------------------------\
     | This function return an emoji.                              |
@@ -83,8 +84,8 @@ class ViewController: UIViewController {
     | and it removes the assigned emoji from the emojiChoices     |
     -------------------------------------------------------------*/
     private func emoji(for card: Card) -> String {
-        if emoji[card.identifier] == nil , emojiChoices.count > 0 {
-            emoji[card.identifier] = emojiChoices.remove(at: emojiChoices.count.arc4random)
+        if emoji[card] == nil , emojiChoices.count > 0 {
+            emoji[card] = emojiChoices.remove(at: emojiChoices.count.arc4random)
         }
         /*----------------------------------------
         if emoji[card.identifier] != nil {
@@ -93,7 +94,8 @@ class ViewController: UIViewController {
          return "?"
         }
         ----------------------------------------*/
-        return emoji[card.identifier] ?? "?"
+    
+       return emoji[card] ?? "?"
     }
 
 
