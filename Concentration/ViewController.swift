@@ -73,7 +73,8 @@ class ViewController: UIViewController {
         }
     }
     
-     private var emojiChoices = ["🦇","😱","🙀","😈","🎃","👻","🍭","🍬","🍎"]
+//     private var emojiChoices = ["🦇","😱","🙀","😈","🎃","👻","🍭","🍬","🍎"]
+       private var emojiChoices = "🦇😱🙀😈🎃👻🍭🍬🍎"
     
     // The emoji var below is a dictionary
     private var emoji = [Card: String]()
@@ -85,7 +86,8 @@ class ViewController: UIViewController {
     -------------------------------------------------------------*/
     private func emoji(for card: Card) -> String {
         if emoji[card] == nil , emojiChoices.count > 0 {
-            emoji[card] = emojiChoices.remove(at: emojiChoices.count.arc4random)
+            let randomStringIndex = emojiChoices.index(emojiChoices.startIndex, offsetBy: emojiChoices.count.arc4random)
+          emoji[card] = String(emojiChoices.remove(at: randomStringIndex))
         }
         /*----------------------------------------
         if emoji[card.identifier] != nil {
@@ -103,7 +105,8 @@ class ViewController: UIViewController {
     
     @IBAction private func Reset(_ sender: UIButton) {
         emoji = [:]
-        emojiChoices = ["🦇","😱","🙀","😈","🎃","👻","🍭","🍬","🍎"]
+//        emojiChoices = ["🦇","😱","🙀","😈","🎃","👻","🍭","🍬","🍎"]
+          emojiChoices = "🦇😱🙀😈🎃👻🍭🍬🍎"
         flipCount = 0
         for index in cardButtons.indices {
         // a cardButton is a UIButton, which is

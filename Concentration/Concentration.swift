@@ -18,6 +18,7 @@ class Concentration
 {
     var cards = [Card]()
 
+    // indexOfOneAndOnlyFaceUpCard is a computed value
     var indexOfOneAndOnlyFaceUpCard: Int? {
         get {
             var foundIndex: Int?
@@ -31,9 +32,16 @@ class Concentration
                 }
             }
             return foundIndex
-            
-        }
+        } // end get
+        // When the indexOfOneAndOnlyOneFaceUpCar is set,
+        // all of the cards or turned FaceDown except the
+        // one that matches the index.
         set {
+            if newValue != nil {
+                print("newValue is \(newValue!)")
+            } else {
+                print("newValue is nil")
+            }
             for index in cards.indices {
                 cards[index].isFaceUp = (index == newValue)
             }
@@ -44,10 +52,10 @@ class Concentration
         assert(cards.indices.contains(index), "Concentration.choseCard(at: \(index)) is not in the cards")
         if !cards[index].isMatched // Do nothing if the card is already matched
         {
-            if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index
-            // if one card and onlt one card is turned up
+            if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
+            // if one card and only one card is turned up
             // and you did not click on the same card that is turn up
-            {
+            
                 // check if cards match
                 if cards[matchIndex] == cards[index] {
                     cards[matchIndex].isMatched = true
@@ -61,8 +69,13 @@ class Concentration
 //                for flipDownIndex in cards.indices {
 //                    cards[flipDownIndex].isFaceUp = false
 //                }
-//                cards[index].isFaceUp = true
+//              cards[index].isFaceUp = true
+ 
                 indexOfOneAndOnlyFaceUpCard = index
+                /*------------------------------------------------------\
+                | The set function of the indexOfOneAndOnlyFaceUpCard   |
+                | will turn the indexed card up and all the other down.  |
+                 ------------------------------------------------------*/
             }
         }
     }
